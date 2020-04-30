@@ -1,0 +1,19 @@
+	<label>何を：</label>
+	<select name="typeId">
+		<option th:each="drink : ${drinkSelect}" th:value="${drink.name}" th:selected="${drink.name == typeId">[[${drink.name}]]</option>
+	</select><br>
+
+<label>どれだけ：</label>
+<select name="quantity">
+  <option th:each="vol : ${volSelect}" th:value="${vol.id}" th:selected="${vol.id == id" th:inline="text">[[${vol.volume}]]</option>
+</select><br>
+
+
+
+<br>
+<h3>何を　どれだけ</h3>
+<table>
+	<tr th:each="obj : ${drinkList}">
+		<td th:text="${obj.drink}">日本酒</td>
+		<td th:text="${obj.quantity}">180ml</td>
+</table>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>飲酒度チェック</title>
+</head>
+<body>
+<h1>飲酒度チェック</h1>
+<form method="post" th:action="@{/check/drunk}">
+	<label>お名前：</label>
+	<div th:text="${name}">◯◯◯◯◯◯◯◯◯◯</div>
+	<label>状態：</label>
+	<div th:text="${status}">酔っ払い状態</div><br>
+	<label>何を：</label>
+	<select name="typeId">
+		<option th:each="drink : ${drinkSelect}" th:value="${drink.name}" th:selected="${drink.name} == *{typeId}">[[${drink.name}]]</option>
+	</select><br>
+	<input type="submit" value="飲んだ！">
+</form>
+<br>
+<h3>何を　どれだけ</h3>
+<table>
+	<tr th:each="obj : ${drinkList}">
+		<td th:text="${obj.name}">日本酒</td>
+		<td th:text="${obj.quantity}">180ml</td>
+</table>
+</body>
+</html>

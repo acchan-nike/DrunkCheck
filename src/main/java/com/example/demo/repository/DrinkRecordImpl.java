@@ -45,5 +45,18 @@ public class DrinkRecordImpl implements DrinkRecordDao {
 
 		return list;
 	}
+	
+	@Override
+	public long drinkSum() {
+		String sql = "SELECT SUM(quantity * volume / 100) AS total FROM drink_record " +
+				"JOIN user ON drink_record.user_id = user.user_id JOIN alcohol_type ON drink_record.type_id = alcohol_type.type_id";
+		
+		Map<String, Object> result = jdbcTemplate.queryForMap(sql);
+		long drinkResult;
+		
+		drinkResult = (long)result.get("total");
+		
+		return drinkResult;
+	}
 
 }

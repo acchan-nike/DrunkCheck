@@ -8,6 +8,8 @@ public class AlcForm {
 	
 	@Digits(integer = 3, fraction = 0)
 	private int vol;
+	
+	private int alcVol;
 
 	private String name;
 	
@@ -17,6 +19,7 @@ public class AlcForm {
 	
 	public AlcForm(
 			int vol,
+			int alcVol,
 			String name,
 			LocalDateTime time) {
 		this.vol = vol;
@@ -31,6 +34,14 @@ public class AlcForm {
 
 	public void setVol(int vol) {
 		this.vol = vol;
+	}
+
+	public int getAlcVol() {
+		return alcVol;
+	}
+
+	public void setAlcVol(int alcVol) {
+		this.alcVol = alcVol;
 	}
 
 	public String getName() {

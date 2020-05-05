@@ -8,6 +8,7 @@ public class DrinkRecord {
 	private int type_id;
 	private String name;
 	private int quantity;
+	private int alc_total;
 	private LocalDateTime date;
 	
 	public int getId() {
@@ -39,6 +40,12 @@ public class DrinkRecord {
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public int getAlc_total() {
+		return alc_total;
+	}
+	public void setAlc_total(int alc_total) {
+		this.alc_total = alc_total;
 	}
 	public LocalDateTime getDate() {
 		return date;

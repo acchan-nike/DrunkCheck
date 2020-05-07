@@ -11,7 +11,6 @@
 	<div th:text="${name}">◯◯◯◯◯◯◯◯◯◯</div>
 	状態：
 	<div th:text="${status}">酔っ払い状態</div><br>
-	合計：  <div th:text="${total}">000ml</div>
 	<label>何を：</label>
 	<select name="typeId">
 		<option th:each="drink : ${drinkSelect}" th:value="${drink.name}" th:selected="${drink.name} == *{typeId}">[[${drink.name}]]</option>

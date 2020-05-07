@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
+
 public class Alcohol {
 	private int type_id;
 	private String name;
-	private int vol;
+	private BigDecimal vol;
 		
 	public int getType_id() {
 		return type_id;
@@ -17,10 +19,10 @@ public class Alcohol {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getVol() {
+	public BigDecimal getVol() {
 		return vol;
 	}
-	public void setVol(int vol) {
+	public void setVol(BigDecimal vol) {
 		this.vol = vol;
 	}
 

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class DrinkRecord {
@@ -7,7 +8,7 @@ public class DrinkRecord {
 	private int user_id;
 	private int type_id;
 	private String name;
-	private int quantity;
+	private BigDecimal quantity;
 	private int alc_total;
 	private LocalDateTime date;
 	
@@ -35,10 +36,10 @@ public class DrinkRecord {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getQuantity() {
+	public BigDecimal getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
 	}
 	public int getAlc_total() {

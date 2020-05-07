@@ -1,5 +1,6 @@
 package com.example.demo.app;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -39,14 +40,14 @@ public class CheckController {
 		model.addAttribute("drinkSelect", list);
 		
 		model.addAttribute("name", "あっちゃん");
-		model.addAttribute("status", "ほろ酔い");
+
+		//飲酒量合計を取得して状態を表示する
+		BigDecimal drinkAlc = drinkList.drinkSum();
+		model.addAttribute("status", drinkStatus(drinkAlc));
 		
 		//飲酒一覧を取得する
 		List<DrinkRecord> drink = drinkList.list();
 		
-		//飲酒量合計を取得して状態を表示する
-		long drinkAlc = drinkList.drinkSum();
-		model.addAttribute("total", drinkAlc);
 		
 		//飲酒一覧を表示する
 		model.addAttribute("drinkList", drink);
@@ -63,16 +64,27 @@ public class CheckController {
 		return "check/index";
 	}
 	
-//	private String drinkStatus(int alcohol) {
-//		switch(alcohol) {
-//		case (0...10):
-//			break;
-//		case (11...20):
-//			break;
-//		
-//		}
-//		return "";
-//	}
+	private String drinkStatus(BigDecimal alcohol) {
+		String status;
+		int i = alcohol.intValue();
+
+		if(i < 5) {
+			status = "爽快";
+		} else if (i < 10) {
+			status = "ほろ酔い";
+		} else if (i < 15) {
+			status = "酩酊初期";
+		} else if (i < 30) {
+			status = "酩酊";
+		} else if (i < 40) {
+			status = "泥酔";
+		} else {
+			status = "昏睡";
+		}
+		
+		return status;
+	}
+	
 	private AlcForm makeAlcForm(Alcohol alc) {
 		AlcForm alcForm = new AlcForm();
 		return alcForm;

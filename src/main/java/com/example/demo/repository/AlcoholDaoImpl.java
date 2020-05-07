@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class AlcoholDaoImpl implements AlcoholDao {
 			Alcohol alcohol = new Alcohol();
 			alcohol.setType_id((int)drinkList.get("type_id"));
 			alcohol.setName((String)drinkList.get("name"));
-			alcohol.setVol((int)drinkList.get("volume"));
+			alcohol.setVol((BigDecimal)drinkList.get("volume"));
 			
 			list.add(alcohol);
 		}

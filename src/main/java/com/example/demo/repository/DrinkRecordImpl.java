@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class DrinkRecordImpl implements DrinkRecordDao {
 			DrinkRecord drink = new DrinkRecord();
 			drink.setId((int)recordList.get("id"));
 			drink.setUser_id((int)recordList.get("user_id"));
-			drink.setQuantity((int)recordList.get("quantity"));
+			drink.setQuantity((BigDecimal)recordList.get("quantity"));
 			
 			Alcohol alcohol = new Alcohol();
 			alcohol.setName((String)recordList.get("name"));
@@ -47,14 +48,15 @@ public class DrinkRecordImpl implements DrinkRecordDao {
 	}
 	
 	@Override
-	public long drinkSum() {
-		String sql = "SELECT SUM(quantity * volume / 100) AS total FROM drink_record " +
-				"JOIN user ON drink_record.user_id = user.user_id JOIN alcohol_type ON drink_record.type_id = alcohol_type.type_id";
+	public BigDecimal drinkSum() {
+		String sql = "SELECT SUM(quantity * volume / (833 * weight)) * 100 AS total FROM drink_record " +
+				"JOIN user ON drink_record.user_id = user.user_id " + 
+				"JOIN alcohol_type ON drink_record.type_id = alcohol_type.type_id";
 		
 		Map<String, Object> result = jdbcTemplate.queryForMap(sql);
-		long drinkResult;
+		BigDecimal drinkResult;
 		
-		drinkResult = (long)result.get("total");
+		drinkResult = (BigDecimal)result.get("total");
 		
 		return drinkResult;
 	}

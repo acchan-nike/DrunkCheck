@@ -10,7 +10,7 @@ CREATE TABLE drink_record (
   user_id int(5) NOT NULL,
   type_id int(2) NOT NULL,
   quantity decimal(3) NOT NULL,
-  date datetime NOT NULL,
+  date datetime,
   PRIMARY KEY (id)
 ) ;
 

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.demo.entity.Alcohol;
+import com.example.demo.entity.DrinkRecord;
+import com.example.demo.repository.DrinkRecordDao;
 
 public class AlcServiceImpl implements AlcService {
-	
+		
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	public AlcServiceImpl(JdbcTemplate jdbcTemplate) {
@@ -23,6 +25,10 @@ public class AlcServiceImpl implements AlcService {
 		
 		List<Map<String, Object>> list = null;
 		return null;
+	}
+
+	@Override
+	public void insert(DrinkRecord drink) {
 	}
 
 }

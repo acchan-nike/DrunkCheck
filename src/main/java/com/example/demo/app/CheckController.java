@@ -16,20 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Alcohol;
 import com.example.demo.entity.DrinkRecord;
+import com.example.demo.entity.User;
 import com.example.demo.repository.AlcoholDaoImpl;
-import com.example.demo.repository.DrinkRecordImpl;
+import com.example.demo.repository.DrinkRecordDaoImpl;
+import com.example.demo.repository.UserDaoImpl;
 
 @Controller
-@RequestMapping("/check")
+@RequestMapping("/drunkcheck")
 public class CheckController {
 	
 	private final AlcoholDaoImpl alcohol;
-	private final DrinkRecordImpl drinkList;
+	private final DrinkRecordDaoImpl drinkList;
+	private final UserDaoImpl user;
+	private final int testId = 1;
 	
 	@Autowired
-	public CheckController(AlcoholDaoImpl alcohol, DrinkRecordImpl drinkList) {
+	public CheckController(AlcoholDaoImpl alcohol, DrinkRecordDaoImpl drinkList, UserDaoImpl user) {
 		this.alcohol = alcohol;
 		this.drinkList = drinkList;
+		this.user = user;
 	}
 	
 	@GetMapping
@@ -38,21 +43,23 @@ public class CheckController {
 		
 		//酒一覧を表示する
 		model.addAttribute("drinkSelect", list);
-		
-		model.addAttribute("name", "あっちゃん");
+
+		String name = user.userName(testId);
+		model.addAttribute("name", name);
+		model.addAttribute("user_id", testId);
 
 		//飲酒量合計を取得して状態を表示する
-		BigDecimal drinkAlc = drinkList.drinkSum();
+		BigDecimal drinkAlc = drinkList.drinkSum(testId);
 		model.addAttribute("status", drinkStatus(drinkAlc));
 		
 		//飲酒一覧を取得する
-		List<DrinkRecord> drink = drinkList.list();
+		List<DrinkRecord> drink = drinkList.list(testId);
 		
 		
 		//飲酒一覧を表示する
 		model.addAttribute("drinkList", drink);
 		
-		return "check/index";
+		return "drunkcheck/index";
 	}
 	
 	@PostMapping("/insert")
@@ -60,8 +67,10 @@ public class CheckController {
 			@Valid @ModelAttribute AlcForm form,
 			BindingResult result,
 			Model model) {
+		DrinkRecord drink = drinkInsert(form);
+		drinkList.insert(drink);
 		
-		return "check/index";
+		return "redirect:/drunkcheck";
 	}
 	
 	private String drinkStatus(BigDecimal alcohol) {
@@ -84,10 +93,14 @@ public class CheckController {
 		
 		return status;
 	}
-	
-	private AlcForm makeAlcForm(Alcohol alc) {
-		AlcForm alcForm = new AlcForm();
-		return alcForm;
-	}
 
+	private DrinkRecord drinkInsert(AlcForm form) {
+		DrinkRecord rec = new DrinkRecord();
+		
+		rec.setUser_id(form.getUser_id());
+		rec.setType_id(form.getType_id());
+		rec.setQuantity(form.getQuantity());
+		
+		return rec;
+	}
 }

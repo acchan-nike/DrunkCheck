@@ -1,16 +1,21 @@
 package com.example.demo.app;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 public class AlcForm {
 	
-	@Digits(integer = 3, fraction = 0)
-	private int vol;
+	private int type_id;
 	
-	private int alcVol;
-
+	private int user_id;
+	
+	@Digits(integer = 3, fraction = 0)
+	@NotNull
+	private BigDecimal quantity;
+	
 	private String name;
 	
 	private LocalDateTime time;
@@ -18,30 +23,41 @@ public class AlcForm {
 	public AlcForm() {}
 	
 	public AlcForm(
-			int vol,
-			int alcVol,
+			int uid,
+			int tid,
+			BigDecimal vol,
 			String name,
 			LocalDateTime time) {
-		this.vol = vol;
+		this.user_id = uid;
+		this.type_id = tid;
+		this.quantity = vol;
 		this.name = name;
 		this.time = time;
 		
 	}
 
-	public int getVol() {
-		return vol;
+	public int getType_id() {
+		return type_id;
 	}
 
-	public void setVol(int vol) {
-		this.vol = vol;
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
 	}
 
-	public int getAlcVol() {
-		return alcVol;
+	public int getUser_id() {
+		return user_id;
 	}
 
-	public void setAlcVol(int alcVol) {
-		this.alcVol = alcVol;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public BigDecimal getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(BigDecimal quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getName() {

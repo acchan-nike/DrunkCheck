@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 public class AlcForm {
 	
@@ -13,7 +14,8 @@ public class AlcForm {
 	private int user_id;
 	
 	@Digits(integer = 3, fraction = 0)
-	@NotNull
+	@Max(999)
+	@Min(1)
 	private BigDecimal quantity;
 	
 	private String name;
